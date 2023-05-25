@@ -49,19 +49,43 @@ limit = 5
 
 function generateInput() {
 
+    $('#box').empty();
     let string = chooseOne(list);
+    out(string)
+
     for (let index = 0; index < string.length; index++) {
-        $('#box').append('<input id="charInut"' + index + ' type="text">')
+        $('#box').append('<input id="charInput' + index + '" type="text">')
     }
 
 
-    let input = document.createElement()
-    input.classList.add('');
-    input.attr('id', 'charInput' + i)
+    
 
-
-    $('#charInput' + 2).val()
     // be tedade string entekhab shode generate inputs
     // add generated input to a
+
+}
+
+guestlimit =1;
+
+function charGuess(char, str){
+
+    // check guest limit
+
+    // find in string
+    // find index
+    // select input add value
+
+guestlimit++;
+
+}
+
+function wordGuess(inp , str){
+
+    // check guest limit
+
+    // check strings
+    // if match alert win
+
+    guestlimit++;
 
 }

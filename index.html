@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel="stylesheet" href="css/main.css">
-        <title>HangMan || StarWars</title>
-    </head>
-    <body>
-        <div class="container-fluid">
-            <header class="row border py-1">
-                <div class="col-1 px-1 d-flex align-items-center">
-                    <img class="img-fluid" src="images/Logo.png" height="100px" alt="Logo">
-                </div>
-                <div class="col-8 px-1 d-flex flex-column">
-                    <h1>HangMan || StarWars</h1>
-                </div>
-                <div class="col-3 px-1 d-flex align-items-center justify-content-center">
-                    <a href="#" title="AboutTheGameBtn"><button>About the game</button></a>
-                </div>
-            </header>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="css/main.css">
+    <title>HangMan || StarWars</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header class="row border py-1">
+            <div class="col-1 px-1 d-flex align-items-center">
+                <img class="img-fluid" src="images/Logo.png" height="100px" alt="Logo">
+            </div>
+            <div class="col-8 px-1 d-flex flex-column">
+                <h1>HangMan || StarWars</h1>
+            </div>
+            <div class="col-3 px-1 d-flex align-items-center justify-content-center">
+                <a href="#" title="AboutTheGameBtn"><button>About the game</button></a>
+            </div>
+        </header>
         <select name="cat" id="lists">
             <option value="Film">Show Film</option>
             <option value="People">Show People</option>
@@ -29,7 +31,12 @@
             <option value="Vehicles">Show Vehicles</option>
         </select>
         <div id="box"></div>
+        <input id="charGuess" type="text">
+        <button id="charguessbtn">Char Guess</button>
+        <input id="wordGuess" type="text">
+        <button id="wordguessbtn">Word Guess</button>
         <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-        <script src="js/main.js"></script> 
-    </body>
+        <script src="js/main.js"></script>
+</body>
+
 </html>
