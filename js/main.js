@@ -86,6 +86,7 @@ function charGuess() {
 
     }else{
         alert('Guesses finished!!')
+        /* to do */
         // function new game
     }
     guestCount++;
