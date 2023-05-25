@@ -1,7 +1,11 @@
 function out(x) {
     console.log(x);
 }
+
 let list = [];
+let guestCount = 1;
+let maxTry = 5;
+let theWord;
 function doList(url) {
 
     $.get(url, (res) => {
@@ -17,6 +21,7 @@ function doList(url) {
 $('#lists').on('change', () => {
     let cat = $('#lists option:selected').val().toLowerCase();
     let thisUrl = 'https://swapi.dev/api/' + cat + '/?page=1';
+    out(thisUrl);
     doList(thisUrl);
 });
 
@@ -27,10 +32,14 @@ function chooseOne(arr) {
 }
 // position char in string
 
-function isCharIn(char, str) {
+function charPos(char, str) {
     var indexes = [];
     var i = -1;
-    while ((i = string.indexOf(char, i + 1)) >= 0) indexes.push(i);
+    out('Position:' + str);
+    while ((i = str.indexOf(char, i + 1)) >= 0) {
+        out(i);
+        indexes.push(i);
+    }
     return indexes;
 }
 
@@ -42,44 +51,50 @@ function equalStrs(srtUser, strRandom) {
 
 // if char is in string
 function charExists(char, str) {
-    return isCharIn(char, str).length > 0;
+    return charPos(char, str).length > 0;
 }
 
-limit = 5
+
 
 function generateInput() {
 
     $('#box').empty();
-    let string = chooseOne(list);
-    out(string)
+    theWord = chooseOne(list);
+    out(theWord)
 
-    for (let index = 0; index < string.length; index++) {
+    for (let index = 0; index < theWord.length; index++) {
         $('#box').append('<input id="charInput' + index + '" type="text">')
     }
-
-
-    
-
-    // be tedade string entekhab shode generate inputs
-    // add generated input to a
-
 }
 
-guestlimit =1;
 
-function charGuess(char, str){
 
+function charGuess() {
+    char = $('#charGuess').val().toLowerCase();
+    str = theWord.toLowerCase();
+    out(char);
+    out(str);
+    let charIndx = charPos(char, str);
     // check guest limit
+    if (maxTry != guestCount) {
+        if (charIndx.length > 0) {// find in string
+            for (let i in charIndx) {
+                out('index: ' + charIndx[i])
+                $('#charInput' + charIndx[i]).val(char);
+            }
+        }
 
-    // find in string
-    // find index
-    // select input add value
-
-guestlimit++;
-
+    }else{
+        alert('Guesses finished!!')
+        // function new game
+    }
+    guestCount++;
+    $('#charGuess').val('');
 }
 
-function wordGuess(inp , str){
+$('#charguessbtn').on('click', charGuess);
+
+function wordGuess(inp, str) {
 
     // check guest limit
 
