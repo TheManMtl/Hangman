@@ -11,17 +11,23 @@
 
 <body>
     <div class="container-fluid">
-        <header class="row border py-1">
-            <div class="col-1 px-1 d-flex align-items-center">
+        <!-- chang:start -->
+        <header
+            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
                 <img class="img-fluid" src="images/Logo.png" height="100px" alt="Logo">
             </div>
-            <div class="col-8 px-1 d-flex flex-column">
+
+            <div class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <h1>HangMan || StarWars</h1>
             </div>
-            <div class="col-3 px-1 d-flex align-items-center justify-content-center">
-                <a href="#" title="AboutTheGameBtn"><button>About the game</button></a>
+
+            <div class="col-md-3 text-end">
+                <a href="#" title="AboutTheGameBtn"></a><button type="button" class="btn btn-primary">About the
+                    game</button></a>
             </div>
         </header>
+        <!-- chang:end -->
         <select name="cat" id="lists">
             <option value="cshoose">Choose Category</option>
             <option value="People">People</option>
@@ -39,6 +45,8 @@
         <button id="wordguessbtn">Word Guess</button>
         <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
         <script src="js/main.js"></script>
+    
+    </div>
 </body>
 
 </html>
