@@ -3,17 +3,18 @@ function out(x) {
 }
 
 // varables
-let list = [];
-let guestCount = 1;
+let list = []; // arr of api pages
+let guestCount = 0;
 let maxTry = 8;
-let theWord;
-let correctChars = 0;
-let enDis = true; // flag to disable/enable
+let theWord; // the word to guess
+let correctChars = 0; // number of corrected guess
+let enDis = true; // flag to disable/enable elements
+
+
+toggleEnDisElems(enDis);
 
 // initializin page at first load and when game is finished
-onLoad(enDis);
-
-function onLoad(tog) {
+function toggleEnDisElems(tog) {
 
     let elems = [];
     let charInput = $('#charGuess');
@@ -24,23 +25,28 @@ function onLoad(tog) {
 
     //elements needs to be disabled
     elems = [charInput, wordInput, btnStart, btnWordG, btnCharG];
-    $(elems).each((ind) => {
+    $(elems).each((indx) => {
 
-        $(elems[ind]).prop('disabled', tog);
+        $(elems[indx]).prop('disabled', tog);
+
     });
 }
 
 //prepare to start
 function initGame() {
 
-    onLoad(false); // enable
-    let box = $('#box');
+    toggleEnDisElems(false); // enable elements
 
-    guestCount = 1;
-    generateInput();
+    guestCount = 0; // wrong answer set to zero
+    generateInput(); // create empty char containers
 
 }
 
+/* 
+connect to starwars api and create a arr of names 
+for specific caegory
+categories: people/Planet/species/Star Ships/Vehicles
+*/
 function doList(url) {
 
     $.get(url, (res) => {
@@ -53,29 +59,42 @@ function doList(url) {
     })
 }
 
+// event lisner for select tag
 $('#lists').on('change', () => {
+
+    //value of selected option
     let cat = $('#lists option:selected').val().toLowerCase();
+
+    //url of selected category
     let thisUrl = 'https://swapi.dev/api/' + cat + '/?page=1';
+
     $('#start').prop('disabled', false);// enable start btn
-    $('#lists').prop('disabled',true); // disable dropdownlist to prevent switching the category
-    $('#theWordRes').text(''); // deleting resul tag 
-    $('#stateImg').attr('src', imgArr[0]);//rest the img
-    doList(thisUrl);
+
+     // disable dropdownlist to prevent switching the category
+    $('#lists').prop('disabled',true);
+    $('#theWordRes').text(''); // reseting result tag 
+    $('#stateImg').attr('src', imgArr[0]);//resting the img
+    $('#progress .progress-bar').css('width', '0%');// reseting progress bar to zero
+
+    doList(thisUrl); // making arr of names
 });
 
-// select randomly from array
-
+// select randomly from array of names
 function chooseOne(arr) {
     return arr[(Math.floor(Math.random() * arr.length))];
 }
-// position char in string
 
+// position of char in string
 function charPos(char, str) {
     var indexes = [];
     var i = -1;
-    out('Position:' + str);
+    /* 
+        if any char exists in the word the 
+        indexes are stored into an arr
+        the indexes will be used to place the letters in the 
+        right places after player guesses
+    */
     while ((i = str.indexOf(char, i + 1)) >= 0) {
-        out(i);
         indexes.push(i);
     }
     return indexes;
@@ -92,34 +111,38 @@ function charExists(char, str) {
     return charPos(char, str).length > 0;
 }
 
+/* 
+    decides the chars player enters
+
+    if any tries left and the char exists inside word 
+    the chars will be placed in the designated places
+*/
 function charGuess() {
     let char = $('#charGuess').val().toLowerCase();
     let str = theWord.toLowerCase();
     let charIndx = charPos(char, str); // char exists in the word
-    if (char.length == 1) {
+    if (char.length == 1) { // input box not empty, not more than one charachter
         // check guest limit
-        if (maxTry != guestCount) {
-            if (charIndx.length > 0) {// find in string
-                for (let i in charIndx) {
+        if (maxTry > guestCount) { // tries
+            if (charIndx.length > 0) {// if exists
+                for (let i in charIndx) { 
                     $('#charInput' + charIndx[i]).val(char);
                     correctChars++;
                 }
-            } else {
-                guestCount++;
+            } else {// wrong guess
+                guestCount++; // increase wrong response count
 
-                $('#theWordRes').text('/' + char + '/ Not found in the Word');
+                $('#theWordRes').text('/' + char + '/ Not found in the Word'); // notify player
             }
-        } else {
-            $('#theWordRes').text('the word was  >>>  ' + theWord + '  <<<  better luck Next Time');
+        } else {// no more tries left
+            $('#theWordRes').text('the word was  >>>  ' + theWord + '  <<<  better luck Next Time'); // message to player
             $('#lists').prop('disabled',false); // enable dropdownlist to be able to restart
-            /* to do */
-            // function new game
-        
-            onLoad(true);
+            
+            toggleEnDisElems(true);
             $('#box').empty();
         }
     } else {
-        alert('Be careful!! It is a charachter ONLY');
+        $('#theWordRes').text('Be careful!! It is only ONE charachter');
     }
     $('#charGuess').val('');
     changeState();
@@ -132,31 +155,31 @@ function wordGuess() {
 
     // check strings
     // if match alert win
-    if (maxTry != guestCount) {// check guest limit
+    if (maxTry > guestCount) {// check guest limit
         if (equalStrs(inputVal, str)) {// find in string
-            alert('You won!')
-        } else {
+            $('#theWordRes').text('You are Hell Of a Fan!!!');
+        } else {  
             guestCount++;
-            out('not the word:' + inputVal);
+            $('#theWordRes').text('/' + str + '/is Not the one!!');
         }
     } else {
-        alert('Guesses finished!!')
-        /* to do */
-        // function new game
+        $('#theWordRes').text('the word was  >>>  ' + theWord + '  <<<  better luck Next Time');
+        toggleEnDisElems(true);
+        $('#box').empty();
     }
 
-    changeState()
+    changeState(); //img go to next 
 
 }
 
 function generateInput() {
-
 
     let inputClasses = 'col form-control mx-1 my-1 border-0 border-bottom border-dark text-center fs-1';
     $('#box').empty();
 
     theWord = chooseOne(list);
     $('#box').addClass('row');
+    
     for (let index = 0; index < theWord.length; index++) {
 
         $('#box').append('<input class="' + inputClasses + '" id="charInput' + index + '" type="text" disabled>')
@@ -181,7 +204,7 @@ const imgArr = [
 ];
 
 function changeState() {
-    let imgIndx = guestCount - 1;
+    let imgIndx = guestCount;
     $('#stateImg').attr('src', imgArr[imgIndx]);
     $('#progress .progress-bar').css('width', (correctChars * 100) / theWord.length + '%');
 }
