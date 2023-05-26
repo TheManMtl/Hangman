@@ -20,7 +20,9 @@ img.headerImg{
     height: 100px !important;
 }
 
-
+ul{
+    font-size: 150%;
+}
 /* end: chang */
 
 .state-img{
