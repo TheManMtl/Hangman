@@ -129,16 +129,20 @@ function wordGuess() {
     if (maxTry > guestCount) {// check guest limit
         if (equalStrs(inputVal, str)) {// matching the player word and the random 
             $('#theWordRes').text('You are Hell Of a Fan!!!'); // messge to winner
+            toggleEnDisElems(true); 
+            $('#box').empty(); 
+            $('#lists').prop('disabled', false);
+
         } else {
             guestCount++;
-            $('#theWordRes').text('/' + str + '/is Not the one!!'); // wrong guess
+            $('#theWordRes').text('/' + inputVal + '/is Not the one!!'); // wrong guess
         }
     } else {// out of tries
         $('#theWordRes').text('the word was  >>>  ' + theWord + '  <<<  better luck Next Time');
         toggleEnDisElems(true); // diable elems
         $('#box').empty(); // reset the char places
     }
-
+    $('#wordGuess').val(''); // clear the value 
     changeState(); //img go to next if wrong response
 
 }
