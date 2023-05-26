@@ -54,20 +54,6 @@ function charExists(char, str) {
     return charPos(char, str).length > 0;
 }
 
-
-
-function generateInput() {
-
-    $('#box').empty();
-    theWord = chooseOne(list);
-
-    for (let index = 0; index < theWord.length; index++) {
-        $('#box').append('<input id="charInput' + index + '" type="text">')
-    }
-}
-
-
-
 function charGuess() {
     let char = $('#charGuess').val().toLowerCase();
     let str = theWord.toLowerCase();
@@ -94,7 +80,7 @@ function charGuess() {
 }
 
 $('#charguessbtn').on('click', charGuess);
-$('#wordguessbtn').on('click', charGuess);
+$('#wordguessbtn').on('click', wordGuess);
 
 function wordGuess() {
 
@@ -116,3 +102,23 @@ function wordGuess() {
         // function new game
     }
 }
+
+function generateInput() {
+
+    $('#box').empty();
+    theWord = chooseOne(list);
+
+    for (let index = 0; index < theWord.length; index++) {
+        $('#box').append('<input id="charInput' + index + '" type="text">')
+    }
+}
+
+function initGame(){
+
+    generateInput();
+    
+}
+
+$('#charguessbtn').on('click', charGuess);
+$('#wordguessbtn').on('click', wordGuess);
+$('#start').on('click', initGame);
