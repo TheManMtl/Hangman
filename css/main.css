@@ -19,4 +19,9 @@ header {
 img.headerImg{
     height: 100px !important;
 }
+
+ul{
+    font-size: 130%;
+}
+
 /* end: chang */
