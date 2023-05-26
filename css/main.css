@@ -20,3 +20,7 @@ img.headerImg{
     height: 100px !important;
 }
 /* end: chang */
+
+.state-img{
+    max-width: 150px;
+}
