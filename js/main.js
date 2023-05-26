@@ -2,11 +2,36 @@ function out(x) {
     console.log(x);
 }
 
+// varables
 let list = [];
 let guestCount = 1;
 let maxTry = 8;
 let theWord;
 let correctChars = 0;
+
+// initializin page at first load and when game is finished
+onLoad();
+
+function onLoad(){
+
+    let elems=[];
+    let charInput = $('#charGuess');
+    let wordInput = $('#wordGuess');
+    let btnStart = $('#start');
+    let btnWordG = $('#wordguessbtn');
+    let btnCharG = $('#charguessbtn');
+
+    //elements needs to be disabled
+    elems=[charInput,wordInput,btnStart,btnWordG,btnCharG];
+
+    //looping elements and disabling
+    $(elems).each((ind)=>{
+        //out(this);
+        $(elems[ind]).prop('disabled', true);
+    });
+}
+
+
 function doList(url) {
 
     $.get(url, (res) => {
@@ -116,6 +141,7 @@ function generateInput() {
 
 function initGame() {
     let box = $('#box');
+
     guestCount = 0;
     generateInput();
 
