@@ -13,3 +13,10 @@ header {
     font-size: 25px;
     font-weight: bold;
 }
+
+/* start: chang */
+/* set the height of images in header */
+img.headerImg{
+    height: 100px !important;
+}
+/* end: chang */
