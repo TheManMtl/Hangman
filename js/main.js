@@ -5,7 +5,7 @@ function out(x) {
 
 // variables
 let list = []; // arr of api pages
-let guestCount = 0;
+let guestCount = 0; //wrong guess count
 let maxTry = 8;
 let theWord; // the word to guess
 let correctChars = 0; // number of corrected guess
@@ -82,7 +82,7 @@ function doList(url) {
 function charGuess() {
     let char = $('#charGuess').val().toLowerCase();
     let str = theWord.toLowerCase();
-    if (char.length == 1 || char != '') { // input box not empty, not more than one charachter
+    if (char.length == 1 && char != '') { // input box not empty, not more than one charachter
 
         let charIndx = charPos(char, str); // char exists in the word
 
@@ -109,6 +109,7 @@ function charGuess() {
         $('#theWordRes').text('Be careful!! Not a good choise');
         guestCount++; // increase wrong response count
     }
+   
     $('#charGuess').val(''); // clear the value 
     changeState(); // img go to next if wrong response
 }
@@ -139,9 +140,10 @@ function wordGuess() {
         }
     } else {// out of tries
         $('#theWordRes').text('the word was  >>>  ' + theWord + '  <<<  better luck Next Time');
-        toggleEnDisElems(true); // diable elems
+        toggleEnDisElems(true); // disable elems
         $('#box').empty(); // reset the char places
     }
+
     $('#wordGuess').val(''); // clear the value 
     changeState(); //img go to next if wrong response
 
@@ -232,14 +234,3 @@ function changeState() {
     $('#stateImg').attr('src', imgArr[imgIndx]);
     $('#progress .progress-bar').css('width', (correctChars * 100) / theWord.length + '%');
 }
-
-/* 
-    how to play
-
-    - select the category of starwars
-    - click the start button
-    - start gussing the characters by entering charachters into the box
-    - then click the Char Guess button
-    - If you already guessed the word type in the word and click the Word Guess button
-    - Remember you hav EIGHT choises
-*/
