@@ -10,9 +10,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chokokutai&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&IM+Fell+English+SC&Cherry+Bomb+One&display=swap" rel="stylesheet">
     <title>HangMan || StarWars</title>
     <script src="https://kit.fontawesome.com/27488a1956.js" crossorigin="anonymous"></script>
 </head>
@@ -23,19 +21,20 @@
 
         <header
             class="row d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <div class="col-md-4 text-center">
                 <img class="img-fluid headerImg" src="images/Logo.png" height="100px" alt="Logo">
             </div>
 
-            <div id="hangmanHead" class="nav col-12 col-md-auto mb-2 text-center mb-md-0">
-                <h1>HangMan || StarWars</h1>
+
+
+            <div class="col-md-4 text-center">
+                <div id="hangmanHead">
+                    <h1>HangMan</h1>
+                    <img class="img-fluid headerImg" src="images/rope.png" alt="rope">
+                </div>
             </div>
 
-            <div class="col-md-2 text-center">
-                <img class="img-fluid headerImg" src="images/rope.png" alt="rope">
-            </div>
-
-            <div class="col-md-2 text-center">
+            <div class="col-md-4 text-center">
                 <a href="About_Game.html" title="AboutTheGameBtn">
                     <button class="btn btn-secondary btn-lg shadow">About
                         the game</button></a>
@@ -45,7 +44,7 @@
 
         <div class="container">
             <div class="col-12 text-center mb-4">
-                <h2 class="text-uppercase">Welcome To <em> <strong> Golf team </strong></em>game</h2>
+                <h2 id="title" class="text-uppercase">Welcome To <em> <strong> Golf team </strong></em>game</h2>
             </div>
             <div class="col-12 text-center mb-4">
                 <h2 id="theWordRes" class="text-uppercase text-dark bg-warning"></h2>
@@ -81,8 +80,8 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8 text-center">
                             <img id="stateImg" src="/images/0.png" alt="" class="state-img img-fluid shadow-sm mb-4">
-                            <div class="col-12 text-center mb-4">
-                                <h2 class="text-uppercase">Correct guess progression</h2>
+                            <div class="col-12 text-center mb-2">
+                                <h4 id="progBarLable" class="text-uppercase">Correct guess progression</h4>
                             </div>
                             <div id="progress" class="progress" role="progressbar" aria-label="Basic example"
                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">

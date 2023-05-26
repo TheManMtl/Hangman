@@ -6,8 +6,15 @@ header {
 }
 
 #hangmanHead{
-    font-family: 'Chokokutai', cursive;
-    
+    font-family: 'Rubik Wet Paint', cursive;
+}
+
+#title, #progBarLable{
+    font-family: 'IM Fell English SC', serif;
+}
+
+#box{
+    font-family: 'Cherry Bomb One', cursive;
 }
 .bgbtn1 {
     background-color: #ffe81f;
