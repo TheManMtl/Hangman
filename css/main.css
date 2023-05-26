@@ -5,6 +5,10 @@ header {
     background-color: #078d69;
 }
 
+#hangmanHead{
+    font-family: 'Chokokutai', cursive;
+    
+}
 .bgbtn1 {
     background-color: #ffe81f;
     color: #000000;

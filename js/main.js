@@ -8,13 +8,14 @@ let guestCount = 1;
 let maxTry = 8;
 let theWord;
 let correctChars = 0;
+let enDis = true; // flag to disable/enable
 
 // initializin page at first load and when game is finished
-onLoad();
+onLoad(enDis);
 
-function onLoad(){
+function onLoad(tog) {
 
-    let elems=[];
+    let elems = [];
     let charInput = $('#charGuess');
     let wordInput = $('#wordGuess');
     let btnStart = $('#start');
@@ -22,15 +23,23 @@ function onLoad(){
     let btnCharG = $('#charguessbtn');
 
     //elements needs to be disabled
-    elems=[charInput,wordInput,btnStart,btnWordG,btnCharG];
+    elems = [charInput, wordInput, btnStart, btnWordG, btnCharG];
+    $(elems).each((ind) => {
 
-    //looping elements and disabling
-    $(elems).each((ind)=>{
-        //out(this);
-        $(elems[ind]).prop('disabled', true);
+        $(elems[ind]).prop('disabled', tog);
     });
 }
 
+//prepare to start
+function initGame() {
+
+    onLoad(false); // enable
+    let box = $('#box');
+
+    guestCount = 1;
+    generateInput();
+
+}
 
 function doList(url) {
 
@@ -47,7 +56,10 @@ function doList(url) {
 $('#lists').on('change', () => {
     let cat = $('#lists option:selected').val().toLowerCase();
     let thisUrl = 'https://swapi.dev/api/' + cat + '/?page=1';
-    out(thisUrl);
+    $('#start').prop('disabled', false);// enable start btn
+    $('#lists').prop('disabled',true); // disable dropdownlist to prevent switching the category
+    $('#theWordRes').text(''); // deleting resul tag 
+    $('#stateImg').attr('src', imgArr[0]);//rest the img
     doList(thisUrl);
 });
 
@@ -83,25 +95,34 @@ function charExists(char, str) {
 function charGuess() {
     let char = $('#charGuess').val().toLowerCase();
     let str = theWord.toLowerCase();
-    let charIndx = charPos(char, str);
-    // check guest limit
-    if (maxTry != guestCount) {
-        if (charIndx.length > 0) {// find in string
-            for (let i in charIndx) {
-                $('#charInput' + charIndx[i]).val(char);
-                correctChars++;
+    let charIndx = charPos(char, str); // char exists in the word
+    if (char.length == 1) {
+        // check guest limit
+        if (maxTry != guestCount) {
+            if (charIndx.length > 0) {// find in string
+                for (let i in charIndx) {
+                    $('#charInput' + charIndx[i]).val(char);
+                    correctChars++;
+                }
+            } else {
+                guestCount++;
+
+                $('#theWordRes').text('/' + char + '/ Not found in the Word');
             }
         } else {
-            guestCount++;
-            out('not in the word:' + char);
+            $('#theWordRes').text('the word was  >>>  ' + theWord + '  <<<  better luck Next Time');
+            $('#lists').prop('disabled',false); // enable dropdownlist to be able to restart
+            /* to do */
+            // function new game
+        
+            onLoad(true);
+            $('#box').empty();
         }
     } else {
-        alert('Guesses finished!!')
-        /* to do */
-        // function new game
+        alert('Be careful!! It is a charachter ONLY');
     }
     $('#charGuess').val('');
-    changeState()
+    changeState();
 }
 
 function wordGuess() {
@@ -130,22 +151,18 @@ function wordGuess() {
 
 function generateInput() {
 
-    let inputClasses = 'col form-control mx-1 my-1 border-0 border-bottom border-dark text-center';
+
+    let inputClasses = 'col form-control mx-1 my-1 border-0 border-bottom border-dark text-center fs-1';
     $('#box').empty();
+
     theWord = chooseOne(list);
     $('#box').addClass('row');
     for (let index = 0; index < theWord.length; index++) {
-        $('#box').append('<input class="' + inputClasses + '" id="charInput' + index + '" type="text">')
+
+        $('#box').append('<input class="' + inputClasses + '" id="charInput' + index + '" type="text" disabled>')
     }
 }
 
-function initGame() {
-    let box = $('#box');
-
-    guestCount = 0;
-    generateInput();
-
-}
 
 $('#charguessbtn').on('click', charGuess);
 $('#wordguessbtn').on('click', wordGuess);
@@ -164,8 +181,8 @@ const imgArr = [
 ];
 
 function changeState() {
-    $('#stateImg').attr('src', imgArr[guestCount]);
-    guestCount
+    let imgIndx = guestCount - 1;
+    $('#stateImg').attr('src', imgArr[imgIndx]);
     $('#progress .progress-bar').css('width', (correctChars * 100) / theWord.length + '%');
 }
 
