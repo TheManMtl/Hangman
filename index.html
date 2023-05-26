@@ -15,8 +15,9 @@
 <body>
     <div class="container-fluid">
         <!-- chang:start -->
+
         <header
-            class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            class="row d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
             <div class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
                 <img class="img-fluid headerImg" src="images/Logo.png" height="100px" alt="Logo">
             </div>
@@ -30,31 +31,74 @@
             </div>
 
             <div class="col-md-2 text-center">
-                <a href="About_Game.html" title="AboutTheGameBtn"><button class="bgbtn1">About the game</button></a>
+                <a href="About_Game.html" title="AboutTheGameBtn"><button class="btn btn-warning btn-lg shadow">About
+                        the game</button></a>
             </div>
         </header>
-        <!-- chang:end -->
-        <select name="cat" id="lists">
-            <option value="cshoose">Choose Category</option>
-            <option value="People">People</option>
-            <option value="Planets">Planet</option>
-            <option value="species">species</option>
-            <option value="starships">Star Ships</option>
-            <option value="Vehicles">Vehicles</option>
-        </select>
 
-        <!-- guess box -->
-        <div id="box"></div>
-        <input id="charGuess" type="text">
-        <button id="charguessbtn">Char Guess</button>
-        <input id="wordGuess" type="text">
-        <button id="wordguessbtn">Word Guess</button>
-        <button id="start">Start The Game</button>
+
+        <div class="container">
+
+            <div class="row mb-5 justify-content-center">
+
+                <div class="col-md-3 text-center">
+                    <!-- chang:end -->
+                    <select name="cat" id="lists" class="form-select">
+                        <option value="cshoose">Choose Category</option>
+                        <option value="People">People</option>
+                        <option value="Planets">Planet</option>
+                        <option value="species">species</option>
+                        <option value="starships">Star Ships</option>
+                        <option value="Vehicles">Vehicles</option>
+                    </select>
+
+                    <!-- Game Zone -->
+                </div>
+
+                <div class="col-md-9 text-end">
+                    <button class="btn btn-warning shadow rounded" id="start">Start The Game</button>
+                </div>
+
+
+                <div id="box" class="col-md-12 py-3">
+                </div>
+
+                <div class="col-md-12 text-center">
+                    <img id="stateImg" src="/images/0.png" alt="" class="state-img img-fluid shadow-sm mb-4">
+                    <div id="progress" class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="0"
+                        aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-success" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="charGuess">Put char here</label>
+                    <input class="form-control" id="charGuess" type="text">
+                    <button class="btn btn-success btn-sm shadow mt-2" id="charguessbtn">Char Guess</button>
+                </div>
+
+                <div class="col-md-4">
+                    <label for="wordGuess">Guess word</label>
+                    <input class="form-control" id="wordGuess" type="text">
+                    <button class="btn btn-info btn-sm shadow mt-2" id="wordguessbtn">Word Guess</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
 
         <!-- chang:start -->
 
         <!-- chang:start -->
-        <footer class="text-center text-white" style="background-color: #f1f1f1;">
+        <footer class="row text-center text-white" style="background-color: #f1f1f1;">
             <div class="container pt-4">
                 <section class="mb-4">
                     <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
@@ -67,7 +111,7 @@
             </div>
             <div class="text-center text-dark p-3" style="background-color: rgba(0, 0, 0, 0.2);">
                 © 2023 Copyright:
-                <a class="text-dark" href=#>Hangman Game Group:Ehsan, Pejman, Chang</a>
+                <a class="text-dark" href=#>Hangman Game Group: Ehsan, Pejman, Chang</a>
             </div>
         </footer>
         <!-- chang:end -->

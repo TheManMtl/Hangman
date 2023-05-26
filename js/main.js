@@ -4,8 +4,9 @@ function out(x) {
 
 let list = [];
 let guestCount = 1;
-let maxTry = 2;
+let maxTry = 8;
 let theWord;
+let correctChars = 0;
 function doList(url) {
 
     $.get(url, (res) => {
@@ -63,6 +64,7 @@ function charGuess() {
         if (charIndx.length > 0) {// find in string
             for (let i in charIndx) {
                 $('#charInput' + charIndx[i]).val(char);
+                correctChars++;
             }
         } else {
             guestCount++;
@@ -74,6 +76,7 @@ function charGuess() {
         // function new game
     }
     $('#charGuess').val('');
+    changeState()
 }
 
 function wordGuess() {
@@ -95,21 +98,25 @@ function wordGuess() {
         /* to do */
         // function new game
     }
+
+    changeState()
+
 }
 
 function generateInput() {
 
-    let inputClasses = 'col-1 mx-1 my-1 border-top-0 border-right-0 border-left-0';
+    let inputClasses = 'col form-control mx-1 my-1 border-0 border-bottom border-dark text-center';
     $('#box').empty();
     theWord = chooseOne(list);
-    $('#box').addClass('container');
+    $('#box').addClass('row');
     for (let index = 0; index < theWord.length; index++) {
         $('#box').append('<input class="' + inputClasses + '" id="charInput' + index + '" type="text">')
     }
 }
 
 function initGame() {
-
+    let box = $('#box');
+    guestCount = 0;
     generateInput();
 
 }
@@ -117,3 +124,33 @@ function initGame() {
 $('#charguessbtn').on('click', charGuess);
 $('#wordguessbtn').on('click', wordGuess);
 $('#start').on('click', initGame);
+
+const imgArr = [
+    '/images/0.png',
+    '/images/01.jpg',
+    '/images/02.jpg',
+    '/images/03.jpg',
+    '/images/04.jpg',
+    '/images/05.jpg',
+    '/images/06.jpg',
+    '/images/07.jpg',
+    '/images/08.jpg',
+];
+
+function changeState() {
+    $('#stateImg').attr('src', imgArr[guestCount]);
+    guestCount
+    $('#progress .progress-bar').css('width', (correctChars * 100) / theWord.length + '%');
+}
+
+
+/* 
+    how to play
+
+    - select the category of starwars
+    - click the start button
+    - start gussing the characters by entering charachters into the box
+    - then click the Char Guess button
+    - If you already guessed the word type in the word and click the Word Guess button
+    - Remember you hav EIGHT choises
+*/
