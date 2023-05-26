@@ -13,3 +13,11 @@ header {
     font-size: 25px;
     font-weight: bold;
 }
+
+.bgbtn2 {
+    background-color: #23eab5;
+    color: #000000;
+    border: 1px solid #000000;
+    border-width: 2px;
+    font-size: 20px;
+}
