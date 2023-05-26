@@ -4,7 +4,7 @@ function out(x) {
 
 let list = [];
 let guestCount = 1;
-let maxTry = 5;
+let maxTry = 2;
 let theWord;
 function doList(url) {
 
@@ -57,30 +57,24 @@ function charExists(char, str) {
 function charGuess() {
     let char = $('#charGuess').val().toLowerCase();
     let str = theWord.toLowerCase();
-
+    let charIndx = charPos(char, str);
     // check guest limit
     if (maxTry != guestCount) {
         if (charIndx.length > 0) {// find in string
             for (let i in charIndx) {
-
                 $('#charInput' + charIndx[i]).val(char);
             }
         } else {
             guestCount++;
             out('not in the word:' + char);
         }
-
     } else {
         alert('Guesses finished!!')
         /* to do */
         // function new game
     }
-
     $('#charGuess').val('');
 }
-
-$('#charguessbtn').on('click', charGuess);
-$('#wordguessbtn').on('click', wordGuess);
 
 function wordGuess() {
 
@@ -90,7 +84,7 @@ function wordGuess() {
     // check strings
     // if match alert win
     if (maxTry != guestCount) {// check guest limit
-        if (equalStrs(inputVal,str)) {// find in string
+        if (equalStrs(inputVal, str)) {// find in string
             alert('You won!')
         } else {
             guestCount++;
@@ -105,18 +99,19 @@ function wordGuess() {
 
 function generateInput() {
 
+    let inputClasses = 'col-1 mx-1 my-1 border-top-0 border-right-0 border-left-0';
     $('#box').empty();
     theWord = chooseOne(list);
-
+    $('#box').addClass('container');
     for (let index = 0; index < theWord.length; index++) {
-        $('#box').append('<input id="charInput' + index + '" type="text">')
+        $('#box').append('<input class="' + inputClasses + '" id="charInput' + index + '" type="text">')
     }
 }
 
-function initGame(){
+function initGame() {
 
     generateInput();
-    
+
 }
 
 $('#charguessbtn').on('click', charGuess);
